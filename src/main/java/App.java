@@ -1,8 +1,28 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        String fileName = "src/main/resources/" + "employees.csv";
+        Scanner inputUser = new Scanner(System.in);
+
+        String searchFile;
+        String fileName;
+        File file;
+
+
+       do {
+           System.out.println("Name of the file: ");
+           searchFile = inputUser.nextLine();
+
+           fileName = "src/main/resources/" + searchFile;
+           file = new File(fileName);
+
+           if (!file.exists()){
+               System.err.println("Error: File does not exist. WTF");
+           }
+       }while(!file.exists());
+
+
 
         FileWriter fileWriter;
 
@@ -13,9 +33,9 @@ public class App {
             String input = bufReader.readLine();
             input = bufReader.readLine();
             fileWriter = new FileWriter("src/main/resources/payroll.csv");
-            fileWriter.write("id|name|gross pay"+"\n");
+            fileWriter.write("id|name|gross pay" + "\n");
             while (input != null) {
-                /*System.out.println("here's the line: " + input);*/
+
                 String[] parts;
 
                 parts = input.split("\\|");
@@ -41,11 +61,11 @@ public class App {
                 input = bufReader.readLine();
 
 
-                fileWriter.write(newEmployee.getId()+ "|"+ newEmployee.getName()+ "|" + newEmployee.calculateGrossPay() + "\n"  );
+                fileWriter.write(newEmployee.getId() + "|" + newEmployee.getName() + "|" + newEmployee.calculateGrossPay() + "\n");
 
 
             }
-        fileWriter.close();
+            fileWriter.close();
         } catch (FileNotFoundException e) {
             System.err.println("I couldn't find the file named: " + fileName);
         } catch (IOException e) {
