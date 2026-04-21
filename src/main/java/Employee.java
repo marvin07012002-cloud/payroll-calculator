@@ -5,7 +5,6 @@ public class Employee {
     private double hoursWorked;
     private double payRate;
 
-    public
 
     public int getId() {
         return id;
