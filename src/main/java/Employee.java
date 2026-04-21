@@ -6,6 +6,11 @@ public class Employee {
     private double payRate;
 
 
+    public double calculateGrossPay() {
+        double grossPay = hoursWorked * payRate;
+        return grossPay;
+    }
+
     public int getId() {
         return id;
     }
