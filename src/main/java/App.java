@@ -1,11 +1,10 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class App {
     public static void main(String[] args) {
         String fileName = "src/main/resources/" + "employees.csv";
+
+        FileWriter fileWriter;
 
         try {
             FileReader reader = new FileReader(fileName);
@@ -13,7 +12,8 @@ public class App {
 
             String input = bufReader.readLine();
             input = bufReader.readLine();
-
+            fileWriter = new FileWriter("src/main/resources/payroll.csv");
+            fileWriter.write("id|name|gross pay"+"\n");
             while (input != null) {
                 /*System.out.println("here's the line: " + input);*/
                 String[] parts;
@@ -40,8 +40,12 @@ public class App {
 
                 input = bufReader.readLine();
 
-            }
 
+                fileWriter.write(newEmployee.getId()+ "|"+ newEmployee.getName()+ "|" + newEmployee.calculateGrossPay() + "\n"  );
+
+
+            }
+        fileWriter.close();
         } catch (FileNotFoundException e) {
             System.err.println("I couldn't find the file named: " + fileName);
         } catch (IOException e) {
